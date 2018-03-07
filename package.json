@@ -1,0 +1,22 @@
+{
+  "name": "wemos-led-matrix",
+  "version": "1.0.0",
+  "description": "Wemos led matrix suppoer for Espruino",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "wemos",
+    "led",
+    "matrix",
+    "espruino"
+  ],
+  "author": "Evgeny Fomin <info@jeka.ru>",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/espruino": "^1.94.0",
+    "typescript": "^2.7.2"
+  }
+}
