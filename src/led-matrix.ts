@@ -6,12 +6,10 @@ class LedMatrix {
 
         this.dataPin.mode("output");
         this.clockPin.mode("output");
-        this.setIntensity(intensity);
 
-
-        this.clockPin.write(false);
         this.clockPin.write(true);
         this.dataPin.write(true);
+        this.setIntensity(intensity);
         this.clear();
     }
 
@@ -21,13 +19,13 @@ class LedMatrix {
 
     public setIntensity(intensity: number) {
         this.intensity = intensity > 7 ? 7 : intensity;
-        this.sendCommand(0x80 | this.intensity | 0x08)
+        this.sendCommand(0x88 | this.intensity )
     }
 
     private sendCommand(cmd: number) {
         this.dataPin.write(false);
         this.send(cmd);
-        this.end();
+        this.dataPin.write(true);
     }
 
     private send(data: number) {
@@ -39,21 +37,25 @@ class LedMatrix {
         }
     }
 
-    private sendData(data: number, address: number = 0xC0) {
+    private sendData(address, data: number) {
         this.sendCommand(0x44);
         this.dataPin.write(false);
-        this.send(address);
+        this.send(0xC0 | address);
         this.send(data);
+        this.dataPin.write(true);
     }
 
     public sendBytes(bytes: number[]) {
-        this.sendCommand(0x40);
-        this.dataPin.write(false);
-        this.send(0xC0);
+        // this.sendCommand(0x40);
+        // this.dataPin.write(false);
+        // this.send(0xC0);
         for (let i = 0; i < 8; i++) {
-            this.send(bytes[i]);
+            // this.send(bytes[i]);
+            this.sendData(i,bytes[i]);
+            this.end();
         }
-        this.end();
+        // this.end();
+        this.setIntensity(this.intensity)
     }
 
     private end() {

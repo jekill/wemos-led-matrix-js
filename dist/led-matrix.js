@@ -7,10 +7,9 @@ var LedMatrix = /** @class */ (function () {
         this.clockPin = clockPin;
         this.dataPin.mode("output");
         this.clockPin.mode("output");
-        this.setIntensity(intensity);
-        this.clockPin.write(false);
         this.clockPin.write(true);
         this.dataPin.write(true);
+        this.setIntensity(intensity);
         this.clear();
     }
     LedMatrix.prototype.clear = function () {
@@ -18,12 +17,12 @@ var LedMatrix = /** @class */ (function () {
     };
     LedMatrix.prototype.setIntensity = function (intensity) {
         this.intensity = intensity > 7 ? 7 : intensity;
-        this.sendCommand(0x80 | this.intensity | 0x08);
+        this.sendCommand(0x88 | this.intensity);
     };
     LedMatrix.prototype.sendCommand = function (cmd) {
         this.dataPin.write(false);
         this.send(cmd);
-        this.end();
+        this.dataPin.write(true);
     };
     LedMatrix.prototype.send = function (data) {
         for (var i = 0; i < 8; i++) {
@@ -33,21 +32,24 @@ var LedMatrix = /** @class */ (function () {
             this.clockPin.write(true);
         }
     };
-    LedMatrix.prototype.sendData = function (data, address) {
-        if (address === void 0) { address = 0xC0; }
+    LedMatrix.prototype.sendData = function (address, data) {
         this.sendCommand(0x44);
         this.dataPin.write(false);
-        this.send(address);
+        this.send(0xC0 | address);
         this.send(data);
+        this.dataPin.write(true);
     };
     LedMatrix.prototype.sendBytes = function (bytes) {
-        this.sendCommand(0x40);
-        this.dataPin.write(false);
-        this.send(0xC0);
+        // this.sendCommand(0x40);
+        // this.dataPin.write(false);
+        // this.send(0xC0);
         for (var i = 0; i < 8; i++) {
-            this.send(bytes[i]);
+            // this.send(bytes[i]);
+            this.sendData(i, bytes[i]);
+            this.end();
         }
-        this.end();
+        // this.end();
+        this.setIntensity(this.intensity);
     };
     LedMatrix.prototype.end = function () {
         this.dataPin.write(false);
