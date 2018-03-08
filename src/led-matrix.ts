@@ -1,4 +1,4 @@
-export default class LedMatrix {
+export class LedMatrix {
 
     constructor(private intensity: number,
                 private dataPin: Pin = D13,

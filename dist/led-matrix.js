@@ -56,4 +56,4 @@ var LedMatrix = /** @class */ (function () {
     };
     return LedMatrix;
 }());
-exports.default = LedMatrix;
+exports.LedMatrix = LedMatrix;
