@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var LedMatrix = /** @class */ (function () {
     function LedMatrix(intensity, dataPin, clockPin) {
         if (dataPin === void 0) { dataPin = D13; }
@@ -40,15 +42,10 @@ var LedMatrix = /** @class */ (function () {
         this.dataPin.write(true);
     };
     LedMatrix.prototype.sendBytes = function (bytes) {
-        // this.sendCommand(0x40);
-        // this.dataPin.write(false);
-        // this.send(0xC0);
         for (var i = 0; i < 8; i++) {
-            // this.send(bytes[i]);
             this.sendData(i, bytes[i]);
             this.end();
         }
-        // this.end();
         this.setIntensity(this.intensity);
     };
     LedMatrix.prototype.end = function () {
@@ -59,3 +56,4 @@ var LedMatrix = /** @class */ (function () {
     };
     return LedMatrix;
 }());
+exports.default = LedMatrix;

@@ -1,9 +1,8 @@
-class LedMatrix {
+export default class LedMatrix {
 
     constructor(private intensity: number,
                 private dataPin: Pin = D13,
                 private clockPin: Pin = D14) {
-
         this.dataPin.mode("output");
         this.clockPin.mode("output");
 
@@ -19,7 +18,7 @@ class LedMatrix {
 
     public setIntensity(intensity: number) {
         this.intensity = intensity > 7 ? 7 : intensity;
-        this.sendCommand(0x88 | this.intensity )
+        this.sendCommand(0x88 | this.intensity)
     }
 
     private sendCommand(cmd: number) {
@@ -46,15 +45,10 @@ class LedMatrix {
     }
 
     public sendBytes(bytes: number[]) {
-        // this.sendCommand(0x40);
-        // this.dataPin.write(false);
-        // this.send(0xC0);
         for (let i = 0; i < 8; i++) {
-            // this.send(bytes[i]);
-            this.sendData(i,bytes[i]);
+            this.sendData(i, bytes[i]);
             this.end();
         }
-        // this.end();
         this.setIntensity(this.intensity)
     }
 
