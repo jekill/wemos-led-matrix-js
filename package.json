@@ -1,6 +1,6 @@
 {
   "name": "wemos-led-matrix",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "Wemos led matrix for Espruino",
   "main": "dist/led-matrix.js",
   "scripts": {

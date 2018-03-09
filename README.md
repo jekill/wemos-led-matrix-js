@@ -4,6 +4,8 @@ JS lib for Wemos LED Matrix Shield
 ## Example for Espruino
 
 ```javascript
+var LedMatrix = require('https://raw.githubusercontent.com/jekill/wemos-led-matrix-js/master/dist/led-matrix.js').LedMatrix;
+
 var leds = Graphics.createArrayBuffer(8,8,1,{
   zigzag: false,
   vertical_byte: true
