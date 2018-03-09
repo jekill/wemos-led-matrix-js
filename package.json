@@ -1,14 +1,14 @@
 {
   "name": "wemos-led-matrix",
-  "version": "1.0.1",
-  "description": "Wemos led matrix suppoer for Espruino",
+  "version": "1.0.2",
+  "description": "Wemos led matrix for Espruino",
   "main": "dist/led-matrix.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": "https://github.com/jekill/wemos-led-matrix-js",
   "keywords": [
-    "wemos",
+    "Wemos",
     "led",
     "matrix",
     "espruino",
